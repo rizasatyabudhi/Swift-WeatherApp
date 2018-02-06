@@ -36,7 +36,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization() // notif for permission to use location
-    
+        
+        // 3. Update the Clima > SupportingFiles > Info.plist, and add the following property:
+        // Privacy - Location Usage Description & Privacy - Location When In Use Usage Description
         
         
     }
