@@ -89,8 +89,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         if let tempResult = json["main"]["temp"].double {
          // json.main.temp, convert json to double
         // 4. (HTTP REQUEST) populate the weatherDataModel instance with data from API
-        weatherDataModel.temperature = Int(tempResult - 273.15) // must use "!" to access/unwrap the data
-        weatherDataModel.city = json["name"].stringValue // json.main, convert json to string
+        weatherDataModel.temperature = Int(tempResult - 273.15)
+        weatherDataModel.city = json["name"].stringValue // json.mame, convert json to string
         weatherDataModel.condition = json["weather"][0]["id"].intValue // json.weather[0].id
         weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
         
@@ -116,7 +116,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     func updateUIWithWeatherData(){
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = "\(weatherDataModel.temperature)"
+        temperatureLabel.text = "\(weatherDataModel.temperature) ℃"
         weatherIcon.image = UIImage(named:weatherDataModel.weatherIconName)
     }
     
@@ -164,7 +164,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     //Write the userEnteredANewCityName Delegate method here:
     func userEnteredANewCityName(city: String) {
-        print(city)
+        let parameters : [String:String] = ["q" : city, "appid" : APP_ID]
+        getWeatherData(url: WEATHER_URL, parameters: parameters)
     }
     
     
